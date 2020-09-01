@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var releaseHandler = require('./releases');
 
 var app = express();
 
@@ -40,46 +41,4 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-// let request = require('request');
-const { Octokit } = require("@octokit/core");
-const octokit = new Octokit({ auth : `5b0fbad7df8f091c952d62d2aab7236ab549ff6f`});
-const request = require('request');
-const fs = require('fs');
-// let demo_package = require('./Packages/Demo Package');
-
-const releases = octokit.request("GET /repos/{owner}/{repo}/releases/assets/{assets_id}", {
-  owner : 'ManavKhorasiya',
-  repo : 'Demo-Package',
-  assets_id : 24333955,
-}).then((response) => {
-  let url = response.data.url;
-  var name = response.data.name;
-  console.log(name);
-  request(
-    {
-      url : url,
-      method : "GET",
-      headers : {
-        Accept : "application/octet-stream",
-        Authorization : "5b0fbad7df8f091c952d62d2aab7236ab549ff6f",
-        "User-Agent" : "",
-      }
-    }, (err,response,body) => {
-      if(err) {
-        console.log(err);
-      }
-      console.log(response.statusCode);
-      if(!err && response.statusCode == 200) {
-        fs.writeFile(name, body, (err) => {
-          if(err) {
-            console.log(`Error occurred in writing file : ${err}`);
-          } else {
-            console.log('File written');
-          }
-        })
-      }
-    }
-  )
-});
-
-// console.log(name);
+// releaseHandler.getLatestRelease('Demo-Package');
