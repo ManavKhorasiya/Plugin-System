@@ -85,7 +85,7 @@ fs.readdir(directoryPath, (err,files) => {
     files.forEach((file) => {
         console.log(`File is : ${file}`);
         var zip = new AdmZip(path.join(directoryPath,file));
-        zip.extractAllTo(path.join(__dirname, "Downloaded Packages"));
+        zip.extractAllTo(path.join(__dirname, "Downloaded Packages"),false);
         console.log('extracted');
     });
 })
