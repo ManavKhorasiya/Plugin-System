@@ -1,0 +1,3 @@
+[submodule "Downloaded Packages/Demo_Package"]
+	path = Downloaded Packages/Demo_Package
+	url = git@github.com:ManavKhorasiya/Demo-Package.git
