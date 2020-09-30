@@ -1,5 +1,5 @@
 let { Octokit } = require("@octokit/core");
-let octokit = new Octokit({ auth : `97a7044adaf6d6ce107a58bd64164c9641e6ef00`});
+let octokit = new Octokit({ auth : `INSERT HERE FROM README`});
 let request = require('request');
 let fs = require('fs');
 let path = require('path');
@@ -16,9 +16,6 @@ let getLatestRelease = async function(repo) {
             owner : 'ManavKhorasiya',
             repo : repo
         });
-        // latest_rel = await response;
-        // console.log(latest_rel);
-        return latest_rel;
     } catch(error) {
         console.log(`Catch error : ${error}`);
     }
@@ -54,7 +51,7 @@ latestRelease.then(ans => {
 //       encoding : null,
 //       headers : {
 //         'Accept' : "application/octet-stream",
-//         Authorization : "97a7044adaf6d6ce107a58bd64164c9641e6ef00",
+//         Authorization : "INSERT HERE FROM README",
 //         'User-Agent' : "request",
 //       }
 //     }, (err,response,body) => {
