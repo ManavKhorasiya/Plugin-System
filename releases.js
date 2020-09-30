@@ -1,5 +1,5 @@
 let { Octokit } = require("@octokit/core");
-let octokit = new Octokit({ auth : `INSERT HERE FROM README`});
+let octokit = new Octokit({ auth : `INSERT TOKEN HERE FROM README`});
 let request = require('request');
 let fs = require('fs');
 let path = require('path');
@@ -8,7 +8,8 @@ let { response } = require("./app");
 
 
 let repo = 'Demo-Package'
-let version
+let version = '1.0.0'
+let assetsId = 24643228
 
 let getLatestRelease = async function(repo) {
     try{
@@ -19,13 +20,20 @@ let getLatestRelease = async function(repo) {
     } catch(error) {
         console.log(`Catch error : ${error}`);
     }
-}
+};
 
+(async () => {
+    let latestRelease = getLatestRelease(repo);
+    latestRelease.then(response => {
+        if(response.data.tag_name[0] == 'v') {
+            console.log(typeof response.data.tag_name)
+            response.data.tag_name.slice(1, response.data.tag_name.length)
+            console.log(response.data.tag_name);
+        }
+        console.log(response.data);
+    });
+})();
 
-let latestRelease = getLatestRelease(repo);
-latestRelease.then(ans => {
-    console.log(ans);
-})
 
 
 // octokit.request("GET /repos/{owner}/{repo}/releases/latest", {
@@ -51,7 +59,7 @@ latestRelease.then(ans => {
 //       encoding : null,
 //       headers : {
 //         'Accept' : "application/octet-stream",
-//         Authorization : "INSERT HERE FROM README",
+//         Authorization : "INSERT TOKEN HERE FROM README",
 //         'User-Agent' : "request",
 //       }
 //     }, (err,response,body) => {
