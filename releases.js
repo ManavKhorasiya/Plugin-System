@@ -1,5 +1,5 @@
 let { Octokit } = require("@octokit/core");
-let octokit = new Octokit({ auth : `INSERT KEY HERE FROM README`});
+let octokit = new Octokit({ auth : `97a7044adaf6d6ce107a58bd64164c9641e6ef00`});
 let request = require('request');
 let fs = require('fs');
 let path = require('path');
@@ -12,11 +12,13 @@ let version
 
 let getLatestRelease = async function(repo) {
     try{
-        let response = await octokit.request("GET /repos/{owner}/{repo}/releases/latest", {
+        return await octokit.request("GET /repos/{owner}/{repo}/releases/latest", {
             owner : 'ManavKhorasiya',
             repo : repo
-        })
-        return response;
+        });
+        // latest_rel = await response;
+        // console.log(latest_rel);
+        return latest_rel;
     } catch(error) {
         console.log(`Catch error : ${error}`);
     }
@@ -24,10 +26,9 @@ let getLatestRelease = async function(repo) {
 
 
 let latestRelease = getLatestRelease(repo);
-console.log(latestRelease);
-// latestRelease.then(response => {
-//     console.log(response.data);
-// })
+latestRelease.then(ans => {
+    console.log(ans);
+})
 
 
 // octokit.request("GET /repos/{owner}/{repo}/releases/latest", {
@@ -53,7 +54,7 @@ console.log(latestRelease);
 //       encoding : null,
 //       headers : {
 //         'Accept' : "application/octet-stream",
-//         Authorization : "INSERT KEY HERE FROM README",
+//         Authorization : "97a7044adaf6d6ce107a58bd64164c9641e6ef00",
 //         'User-Agent' : "request",
 //       }
 //     }, (err,response,body) => {
